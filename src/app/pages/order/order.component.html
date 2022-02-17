@@ -10,100 +10,44 @@
             <div class="col-lg-5 col-md-5 col-6">
                 <div class="card">
                     <div class="card-body">
-                        <button type="button" class="btn btn-secondary btn-sm mr-2">Antrian</button>
-                        <button type="button" class="btn btn-primary btn-sm mr-2">Diproses</button>
-                        <button type="button" class="btn btn-info btn-sm  mr-2">Siap Diambil</button>
-                        <button type="button" class="btn btn-success btn-sm  mr-2">Selesai</button>
-                        <button type="button" class="btn btn-danger btn-sm ">Dibatalkan</button>
+                        <button type="button" (click)="getOrderFiltered(0)"class="btn btn-secondary btn-sm mr-2">Antrian</button>
+                        <button type="button" (click)="getOrderFiltered(1)" class="btn btn-primary btn-sm mr-2">Diproses</button>
+                        <button type="button" (click)="getOrderFiltered(2)" class="btn btn-info btn-sm  mr-2">Diambil</button>
+                        <button type="button" (click)="getOrderFiltered(3)" class="btn btn-success btn-sm  mr-2">Selesai</button>
+                        <button type="button" (click)="getOrderFiltered(4)" class="btn btn-danger btn-sm mr-2">Dibatalkan</button>
+                        <button type="button" (click)="toggleSearch(true)" class="btn btn-primary btn-sm "><i class="fa fa-search"></i></button>
+
+                        <div class="mt-3" *ngIf="is.showSearch == true">
+                            <div class="form-inline">
+                                <input type="text"
+                                class="form-control form-control-sm mr-2" name="" id="" aria-describedby="helpId" placeholder="Pencarian.. " [(ngModel)]="cari.nama">
+                                <button type="button" class="btn btn-primary btn-sm mr-2" (click)="getOrderFilteredString(cari)"><i class="fa fa-search"></i> Cari</button>
+                                <button type="button" (click)="toggleSearch(false)" class="btn btn-danger btn-sm ">x</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="scrollableDivOrder">
-                    <div class="card rounded">
+                    <div class="card rounded" *ngFor="let item of listOrder">
                         <div class="row no-gutters">
                             <div class="col-md-4 card-body bg-primary rounded">
                             <h6 class="text-white ml-2">Pesanan</h6>
                             <div class="col-10 float-right">
-                                <h5 class="text-white mb-0">002/KWT/01/2022</h5>
+                                <h5 class="text-white mb-0">{{item.no_struk}}</h5>
                             </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body text-right">
-                                    <h5 class="card-title"><span class="badge bg-secondary text-white float-left">Dalam Antrian</span> Yogi Bagus Karunia</h5>
-                                    <p class="card-text"><small class="text-muted">10 Okt 2022 20:00:00</small></p>
-                                    <h5 class="card-title">10 Items <span class="text-success fw-bold">(10000)</span></h5>
-                                    <a  href="javascript: void(0);" class=" stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card rounded">
-                        <div class="row no-gutters">
-                            <div class="col-md-4 card-body bg-primary rounded">
-                            <h6 class="text-white ml-2">Pesanan</h6>
-                            <div class="col-10 float-right">
-                                <h5 class="text-white mb-0">002/KWT/01/2022</h5>
-                            </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body text-right">
-                                    <h5 class="card-title"><span class="badge bg-secondary text-white float-left">Dalam Antrian</span> Yogi Bagus Karunia</h5>
-                                    <p class="card-text"><small class="text-muted">10 Okt 2022 20:00:00</small></p>
-                                    <h5 class="card-title">10 Items <span class="text-success fw-bold">(10000)</span></h5>
-                                    <a  href="javascript: void(0);" class=" stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card rounded">
-                        <div class="row no-gutters">
-                            <div class="col-md-4 card-body bg-primary rounded">
-                            <h6 class="text-white ml-2">Pesanan</h6>
-                            <div class="col-10 float-right">
-                                <h5 class="text-white mb-0">002/KWT/01/2022</h5>
-                            </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body text-right">
-                                    <h5 class="card-title"><span class="badge bg-secondary text-white float-left">Dalam Antrian</span> Yogi Bagus Karunia</h5>
-                                    <p class="card-text"><small class="text-muted">10 Okt 2022 20:00:00</small></p>
-                                    <h5 class="card-title">10 Items <span class="text-success fw-bold">(10000)</span></h5>
-                                    <a  href="javascript: void(0);" class=" stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card rounded">
-                        <div class="row no-gutters">
-                            <div class="col-md-4 card-body bg-primary rounded">
-                            <h6 class="text-white ml-2">Pesanan</h6>
-                            <div class="col-10 float-right">
-                                <h5 class="text-white mb-0">002/KWT/01/2022</h5>
-                            </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body text-right">
-                                    <h5 class="card-title"><span class="badge bg-secondary text-white float-left">Dalam Antrian</span> Yogi Bagus Karunia</h5>
-                                    <p class="card-text"><small class="text-muted">10 Okt 2022 20:00:00</small></p>
-                                    <h5 class="card-title">10 Items <span class="text-success fw-bold">(10000)</span></h5>
-                                    <a  href="javascript: void(0);" class=" stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card rounded">
-                        <div class="row no-gutters">
-                            <div class="col-md-4 card-body bg-primary rounded">
-                            <h6 class="text-white ml-2">Pesanan</h6>
-                            <div class="col-10 float-right">
-                                <h5 class="text-white mb-0">002/KWT/01/2022</h5>
-                            </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body text-right">
-                                    <h5 class="card-title"><span class="badge bg-secondary text-white float-left">Dalam Antrian</span> Yogi Bagus Karunia</h5>
-                                    <p class="card-text"><small class="text-muted">10 Okt 2022 20:00:00</small></p>
-                                    <h5 class="card-title">10 Items <span class="text-success fw-bold">(10000)</span></h5>
-                                    <a  href="javascript: void(0);" class=" stretched-link"></a>
+                                    <h5 class="card-title">
+                                        <span *ngIf="item.status == 0" class="badge bg-secondary text-white float-left">Dalam Antrian</span> 
+                                        <span *ngIf="item.status == 1" class="badge bg-primary text-white float-left">Diproses</span>
+                                        <span *ngIf="item.status == 2" class="badge bg-info text-white float-left">Siap Diambil</span>
+                                        <span *ngIf="item.status == 3" class="badge bg-success text-white float-left">Selesai</span>
+                                        <span *ngIf="item.status == 4" class="badge bg-danger text-white float-left">Dibatalkan</span>
+                                        {{item.nama}}</h5>
+                                    <p class="card-text"><small class="text-muted">{{item.tanggal}}</small></p>
+                                    <h5 class="card-title"><span class="text-success fw-bold">Rp {{item.total_bayar}}</span></h5>
+                                    <a  href="javascript: void(0);" (click)="getDetailOrder(item.id_order)" class=" stretched-link"></a>
                                 </div>
                             </div>
                         </div>
@@ -114,55 +58,47 @@
             <div class="col-lg-7 col-md-7 col-6">
                 <div class="card">
                     <div class="card-body pr-0">
-                       <h3>Pesanan 002/KWT/01/2022</h3>
-                       <hr>
-                       <div class="scrollableDivItem">
-                           <div class="row no-gutters">
-                                <div class="col-md-4">
-                                <img src="https://i.ibb.co/R9kJtny/1637916829.png" class="img-fluid" alt="">
-                                </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body text-right">
-                                            <h5 class="card-title">Ayam Geprek</h5>
-                                            <p class="card-text">
-                                                <small class="text-muted"><b>Jumlah</b> : 1 Items</small><br>
-                                                <small class="text-muted"><b>Topping</b> : Boba(2000), Es batu(2000)</small><br>
-                                                <small class="text-muted"><b>Level</b> : 1</small>
-                                            </p>
-                                            <h5 class="card-title">Sub Total: <span class="text-success fw-bold">Rp 10000</span></h5>
-                                        </div>
-                                    </div>
+                        <div style="height: 520px;" *ngIf="is.showDetail == false">
+                            <div class="d-flex justify-content-center pt-5" >
+                                <img src="../../../assets/images/keranjang-vector.png" style="max-width: 200px;" class="img-fluid" alt="">
                             </div>
+                            <h4 class="text-center mt-3">Tidak ada order dipilih</h4>
+                        </div>
+                        <div *ngIf="is.showDetail == true">
+                            <h3>No Struk: {{order.no_struk}}</h3>
                             <hr>
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                <img src="https://i.ibb.co/R9kJtny/1637916829.png" class="img-fluid" alt="">
-                                </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body text-right">
-                                            <h5 class="card-title">Ayam Geprek</h5>
-                                            <p class="card-text">
-                                                <small class="text-muted"><b>Jumlah</b> : 1 Items</small><br>
-                                                <small class="text-muted"><b>Topping</b> : Boba(2000), Es batu(2000)</small><br>
-                                                <small class="text-muted"><b>Level</b> : 1</small>
-                                            </p>
-                                            <h5 class="card-title">Sub Total: <span class="text-success fw-bold">Rp 10000</span></h5>
-                                        </div>
-                                    </div>
+                            <div class="scrollableDivItem">
+                                <div class="row no-gutters" *ngFor="let item of listMenu">
+                                     <div class="col-md-4">
+                                     <img src="{{item.foto}}" class="img-fluid" alt="">
+                                     </div>
+                                         <div class="col-md-8">
+                                             <div class="card-body text-right">
+                                                 <h5 class="card-title">{{item.nama}}</h5>
+                                                 <p class="card-text">
+                                                     <small class="text-muted"><b>Jumlah</b> : {{item.jumlah}} Items</small><br>
+                                                     <small class="text-muted"><b>Topping</b> : Boba(2000), Es batu(2000)</small><br>
+                                                     <small class="text-muted"><b>Level</b> : 1</small>
+                                                 </p>
+                                                 <h5 class="card-title">Sub Total: <span class="text-success fw-bold">Rp {{item.harga}}</span></h5>
+                                             </div>
+                                         </div>
+                                    <hr>
+                                 </div>
                             </div>
-                       </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card bg-primary">
+                <div class="card bg-primary" *ngIf="is.showButtonAction == true" >
                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <button type="button" class="btn btn-danger">Tolak</button>
                     <button type="button" class="btn btn-success">Terima</button>
                     </div>
                     <div class=" p-4 ">
-                        <span class="float-right text-white">Voucher 20% (30000)</span><br>
+                        <span class="float-right text-white">Potongan ({{order.potongan}})</span><br>
                         <div class="d-flex justify-content-between">
                             <h3 class="text-white">Grand Total</h3>
-                            <h2 class="text-white">Rp 10000</h2>
+                            <h2 class="text-white">Rp {{order.total_bayar}}</h2>
                         </div>
                     </div>
                 </div>
