@@ -1,0 +1,244 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <app-page-title
+                [title]="pageTitle"
+                [breadcrumbItems]="breadCrumbItems"
+                >
+            </app-page-title>
+            <br>
+            <form [formGroup]="formMenu" action="">
+            <div class="card" *ngIf="is.showForm == true">
+                <div class="card-header border-bottom">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="mb-0 font-size-18">Tambah Menu</h4>
+                        
+                        <div>
+                            <button type="button" class="btn btn-info btn-sm mr-2" (click)="resetForm()" *ngIf="is.edit == true"><i class="fa fa-pluss"></i> Tambah Menu</button>
+                            <button type="button" class="btn btn-danger btn-sm" (click)="closeForm()">x</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                          <img [src]="currentImage"  (click)="selectImage.click()" class="img-fluid img-thumbnail">
+                          <input type="file" (change)="updateImage($event)" style="display: none" #selectImage>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                              <label for="" class="form-label">Nama</label>
+                              <input type="text"
+                                class="form-control" formControlName="nama" name="" id="" aria-describedby="helpId" placeholder="Nama makanan">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="">Kategori</label>
+                                    <div class="input-group">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-primary btn-sm active">
+                                                <input type="radio" name="kategori" id="option1" value="makanan" (change)="selected($event)" autocomplete="off" formControlName="kategori"> Makanan
+                                            </label>
+                                            <label class="btn btn-primary btn-sm">
+                                                <input type="radio" name="kategori" id="option2" value="minuman" (change)="selected($event)" autocomplete="off" formControlName="kategori" > Minuman
+                                            </label>
+                                            <label class="btn btn-primary btn-sm">
+                                                <input type="radio" name="kategori" id="option3" value="snack" (change)="selected($event)" autocomplete="off" formControlName="kategori" > Snack
+                                            </label>
+                                        </div>
+                                    </div>      
+                                </div>
+                                <div class="col-6">
+                                    <label for="">Status</label>
+                                    <div class="input-group">
+                                         <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-primary btn-sm active">
+                                                <input type="radio" name="status" id="option1" value="1" (change)="selected($event)" autocomplete="off" formControlName="status"> Ada
+                                            </label>
+                                            <label class="btn btn-primary btn-sm">
+                                                <input type="radio" name="status" id="option2" value="0" (change)="selected($event)" autocomplete="off" formControlName="status" > Habis
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+
+                            <div class="mb-3">
+                              <label for="" class="form-label">Harga</label>
+                              <input type="text"
+                                class="form-control" name="harga" id="" formControlName="harga" aria-describedby="helpId" placeholder="Ex: 20000">
+                            </div>
+                            <div class="mb-3">
+                              <label for="" class="form-label">Deskripsi Singkat</label>
+                              <textarea  class="form-control"  name="deskripsi" id="" formControlName="deskripsi" cols="10" rows="4" placeholder="Diskripsi singkat..."></textarea>
+                            </div>
+
+                              <button type="button" name="" id="" *ngIf="is.edit == false" class="btn btn-block btn-primary btn-sm" (click)="onSubmit()"><i class="fas fa-save"></i> Simpan</button>
+                              <button type="button" name="" id="" *ngIf="is.edit == true" class="btn btn-block btn-primary btn-sm" (click)="onUpdate()"><i class="fas fa-save"></i> Update</button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div *ngIf="is.edit == true">
+                        <h2 class="font-size-18 text-center mt-4">Tambah Topping</h2>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Keterangan</th>
+                                    <th>Type</th>
+                                    <th>Harga</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of listTopping">
+                                    <td>
+                                        <div class="mb-3">
+                                          <input type="text"
+                                            class="form-control form-control-sm" name="" id="" aria-describedby="helpId" placeholder="Keterangan" value="{{item.keterangan}}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="mb-3">
+                                          <select class="form-control form-control-sm" name="" id="">
+                                            <option [selected]="item.type == 'topping'">Topping</option>
+                                            <option [selected]="item.type == 'level'">Level</option>
+                                          </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="mb-3">
+                                          <input type="text"
+                                            class="form-control form-control-sm" name="" id="" aria-describedby="helpId" placeholder="Harga" value="{{item.harga}}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm mr-2"><i class="fas fa-save"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr *ngFor="let item of listLevel">
+                                    <td>
+                                        <div class="mb-3">
+                                          <input type="text"
+                                            class="form-control form-control-sm" name="" id="" aria-describedby="helpId" placeholder="Keterangan" value="{{item.keterangan}}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="mb-3">
+                                          <select class="form-control form-control-sm" name="" id="">
+                                            <option [selected]="item.type == 'topping'">Topping</option>
+                                            <option [selected]="item.type == 'level'">Level</option>
+                                          </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="mb-3">
+                                          <input type="text"
+                                            class="form-control form-control-sm" name="" id="" aria-describedby="helpId" placeholder="Harga" value="{{item.harga}}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm mr-2"><i class="fas fa-save"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="mb-3">
+                                          <input type="text"
+                                            class="form-control form-control-sm" name="" id="" aria-describedby="helpId" placeholder="Keterangan">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="mb-3">
+                                          <select class="form-control form-control-sm" name="" id="">
+                                            <option value="" disabled selected>- Pilih Type -</option>
+                                            <option>Topping</option>
+                                            <option>Level</option>
+                                          </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="mb-3">
+                                          <input type="text"
+                                            class="form-control form-control-sm" name="" id="" aria-describedby="helpId" placeholder="Harga">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-save"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+            </form>
+
+            <div class="card">
+                <div class="card-header border-bottom">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="mb-0 font-size-18">Daftar Menu</h4>
+                        <button type="button" class="btn btn-info btn-sm" (click)="showForm()"><i class="fas fa-plus"></i> Tambah Menu</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-3 col-lg-6 col-12">
+                        <input type="text" class="form-control form-control-sm mr-2" aria-label="Text input with segmented dropdown button" placeholder="pencarian..." [(ngModel)]="cari.nama">
+                        <select class="form-control form-control-sm mr-2" name="" id="" [(ngModel)]="cari.kategori">
+                            <option value="">- kategori -</option>
+                            <option value="makanan">Makanan</option>
+                            <option value="minuman">Minuman</option>
+                            <option value="snack">Snack</option>
+                        </select>
+                        <select class="form-control form-control-sm mr-2" name="" id="" [(ngModel)]="cari.status">
+                            <option value="">- status -</option>
+                            <option value="1">Ada</option>
+                            <option value="0">Habis</option>
+                        </select>
+                        <button type="button" class="btn btn-primary btn-sm mr-2" (click)="searchMenu(cari)"><i class="fas fa-search"></i> Cari</button>
+                        <button type="button" class="btn btn-info btn-sm" (click)="searchMenu(false)"><i class="fas fa-sync"></i></button>
+                    </div>
+                    <table class="table table-sm table-stripped">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th>No</th>
+                                <th>Gambar</th>
+                                <th>Nama</th>
+                                <th>Kategori</th>
+                                <th>Harga</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listMenu; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.nama}}</td>
+                                <td>
+                                    <img src="{{item.foto}}" style="max-width: 200px;"  class="img-fluid img-thumbnail img-fit-menu" onError="this.src='../../../assets/images/default.png'" alt="menu img">
+                                </td>
+                                <td>{{item.kategori}}</td>
+                                <td>{{item.harga}}</td>
+                                <td>
+                                    <span class="badge bg-success text-white" *ngIf="item.status == 1">Ada</span>
+                                    <span class="badge bg-success text-white" *ngIf="item.status == 0">Habis</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-info btn-sm mr-2"><i class="fa fa-edit" (click)="onEdit(item.id_menu)" ></i></button>
+                                    <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

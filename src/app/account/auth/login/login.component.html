@@ -1,0 +1,99 @@
+<form [formGroup]="loginForm" action="">
+<div class="account-pages">
+  <div class="row main-pages">
+    <div class="col-md-6 col-12">
+      <section class="form-section">
+        <div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <img
+                class="img-logo"
+                src="../../../../assets/images/logo.svg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h2><b>Sign In</b></h2>
+              <p>
+                Don't have account? <a href="#" class="text-primary">Sign Up</a>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="email"
+                  >Email <span class="text-danger">*</span></label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email Address....."
+                  formControlName="email"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="email"
+                  >Password <span class="text-danger">*</span></label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Password....."
+                  formControlName="password"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="remember_me"
+                />
+                <label class="form-check-label" for="remember_me"
+                  >Remember Me</label
+                >
+              </div>
+            </div>
+            <div class="col-md-6 text-right">
+              <a href="#" class="text-primary">Forgot Password</a>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 text-center">
+              <button class="btn-login" (click)="onSubmit()">Sign In</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="col-md-6 col-12">
+      <section
+      class="intro-section d-flex justify-content-center align-items-center"
+      >
+        <section class="description">
+          <h1 class="text-center">Welcome To</h1>
+          <div class="card p-5">
+            <img src="../../../../assets/images/javacode.png" class="img-fluid" style="max-width: 500px;" alt="Javacode Logo">
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor
+            corrupti iste eius, accusamus ab facilis officiis esse odit laborum
+            quidem alias sequi expedita pariatur velit sed cupiditate provident
+            adipisci ut, neque eaque et numquam nobis atque.
+          </p>
+        </section>
+      </section>
+    </div>
+  </div>
+</div>
+</form>

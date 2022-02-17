@@ -1,0 +1,253 @@
+<div class="container-fluid" *ngIf="!showForm">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between">
+            <h4 class="mb-0 font-size-18">{{ pageTitle }}</h4>
+            <div>
+              <div class="btn-group btn-group-sm" role="group">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-secondary"
+                  (click)="filter()"
+                >
+                  <i class="fa fa-search font-size-14 align-middle mr-1"></i>
+                  Pencarian
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-primary"
+                  (click)="create()"
+                >
+                  <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah
+                  Akses
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12" [hidden]="filterCollapsed">
+                <div class="card bg-light py-4">
+                  <div class="d-flex justify-content-center">
+                    <div class="row container-fluid">
+                      <div class="col-md-4">
+                        <div class="form-group row my-2">
+                          <label
+                            for="paramnama"
+                            class="
+                              col-md-4 col-form-label col-form-label-sm
+                              text-nowrap
+                            "
+                            >Nama Akses</label
+                          >
+                          <div class="col-md-8">
+                            <input
+                              class="form-control form-control-sm"
+                              [(ngModel)]="modelParam.nama"
+                              name="paramnama"
+                              type="text"
+                              placeholder="Cari berdasarkan Nama"
+                              (keyup)="reloadDataTable()"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table
+                datatable
+                [dtOptions]="dtOptions"
+                class="table table-hover mobile-optimised mb-0"
+                data-page-length="20"
+              >
+                <thead class="thead-light">
+                  <tr class="text-center">
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="totalItems == 0">
+                    <td colspan="3" class="bg-light text-center">
+                      Tidak ada data
+                    </td>
+                  </tr>
+                  <tr
+                    *ngFor="let val of listData; index as i"
+                    class="text-center"
+                    (dblclick)="view(val)"
+                  >
+                    <td data-th="No">{{ i + 1 }}</td>
+                    <td data-th="Nama">{{ val.nama }}</td>
+                    <td class="row-action">
+                      <div class="btn-group btn-group-sm" role="group">
+                        <button
+                          type="button"
+                          class="
+                            btn btn-sm btn-info
+                            fa fa-edit
+                            font-size-14
+                            align-middle
+                          "
+                          placement="top"
+                          (click)="edit(val)"
+                          ngbTooltip="Ubah"
+                        ></button>
+                        <button
+                          type="button"
+                          class="
+                            btn btn-sm btn-danger
+                            fa fa-trash
+                            font-size-14
+                            align-middle
+                          "
+                          placement="top"
+                          (click)="delete(val)"
+                          ngbTooltip="Hapus"
+                        ></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid" *ngIf="showForm">
+    <div class="row">
+      <div class="col-md-12">
+          <app-page-title
+            [title]="pageTitle"
+            [breadcrumbItems]="breadCrumbItems"
+          ></app-page-title>
+        <div class="card mt-4">
+          <div class="card-body">
+            <form disabled="isView">
+              <fieldset [disabled]="is.view">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label
+                            class="
+                              col-md-4 col-form-label col-form-label-sm
+                              required
+                            "
+                            >Nama</label
+                          >
+                          <div class="col-md-8">
+                            <input
+                              class="form-control form-control-sm"
+                              type="text"
+                              name="nama"
+                              [(ngModel)]="model.nama"
+                              placeholder="Nama"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="row mt-5">
+                  <div class="col-md-3">
+                    <div
+                      class="
+                        panel
+                        panels
+                        panel-primary
+                        bg-primary
+                        rounded
+                        align-items-center
+                      "
+                    >
+                      <div class="panel-heading pt-2">
+                        <input
+                          [(ngModel)]="modelCheck.DataMaster"
+                          name="model_check_master"
+                          class="
+                            custom-control-input-nanti-saja
+                            check-all
+                            mt-2
+                            ml-4 
+                          "
+                          (change)="
+                            checkAllKolom(
+                              modelCheck.DataMaster,
+                              [
+                                'm_user',
+                                'm_roles'
+                              ],
+                              'master'
+                            )
+                          "
+                          type="checkbox"
+                        />
+                        <label class="i-checks text-white ml-2"
+                          >Data Master</label
+                        >
+                      </div>
+                      <div class="list-group bg-white">
+                        <div class="list-group-item">
+                          <label class="i-checks">
+                            <input
+                              type="checkbox"
+                              [(ngModel)]="model.akses.master.m_user"
+                              name="m_user"
+                              (change)="check('master')"
+                            />
+                            User
+                          </label>
+                        </div>
+                        <div class="list-group-item">
+                          <label class="i-checks">
+                            <input
+                              type="checkbox"
+                              [(ngModel)]="model.akses.master.m_roles"
+                              name="m_roles"
+                              (change)="check('master')"
+                            />
+                            Roles
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class="card-footer">
+            <div class="float-right">
+              <button class="btn btn-light btn-sm mr-2" (click)="index()">
+                <i class="fa fa-chevron-left font-size-14 align-middle mr-2"></i>
+                Kembali
+              </button>
+              <!--  -->
+              <button
+                class="btn btn-primary btn-sm"
+                [disabled]="model.nama == ''"
+                *ngIf="!is.view"
+                (click)="save()"
+              >
+                <i class="fa fa-save font-size-14 align-middle mr-2"></i>
+                Simpan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

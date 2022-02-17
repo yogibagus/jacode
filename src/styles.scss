@@ -1,0 +1,76 @@
+/* You can add global styles to this file, and also import other style files */
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0px !important;
+}
+
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:before {
+  content: "" !important;
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:after {
+  content: "" !important;
+}
+
+table.dataTable {
+  width: 100% !important;
+}
+
+table.dataTable tbody tr.odd {
+  display: none !important;
+}
+
+.dataTables_wrapper .dataTables_length {
+  color: #333333;
+  display: none;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+  text-align: right;
+  display: none;
+}
+
+@media (max-width: 992px) {
+  div.dataTables_wrapper div.dataTables_length label {
+    display: none;
+  }
+
+  div.dataTables_wrapper div.dataTables_length,
+  div.dataTables_wrapper div.dataTables_filter,
+  div.dataTables_wrapper div.dataTables_info,
+  div.dataTables_wrapper div.dataTables_paginate {
+    text-align: right;
+  }
+
+  div.dataTables_wrapper div.dataTables_info {
+    display: none;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -1,0 +1,285 @@
+<div class="container-fluid" *ngIf="is.showForm == false">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between pt-4">
+          <h4 class="mb-0 font-size-18">Tes</h4>
+          <div>
+            <div class="btn-group btn-group-sm" role="group">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary"
+                (click)="toggle('is', 'search')"
+              >
+                <i class="fa fa-search font-size-14 align-middle mr-1"></i>
+                Pencarian
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm btn-primary"
+                (click)="create()"
+              >
+                <i class="fa fa-plus font-size-14 align-middle mr-1"></i>
+                Tambah Pengguna
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12" [hidden]="is.search == false">
+              <div class="card bg-light py-4">
+                <div class="d-flex justify-content-center">
+                  <div class="row container-fluid">
+                    <div class="col-md-4">
+                      <div class="form-group row my-2">
+                        <label
+                          for="paramnama"
+                          class="col-md-4 col-form-label col-form-label-sm text-nowrap"
+                          >Cari Nama</label
+                        >
+                        <div class="col-md-8">
+                          <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            name="paramusername"
+                            placeholder="Cari nama"
+                            [(ngModel)]="modelParams.nama"
+                            (keyup)="reloadDataTable()"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table
+                datatable
+                class="table table-hover mobile-optimised mb-0"
+                data-page-length="20"
+                id="table-user"
+                [dtOptions]="dtOptions"
+              >
+                <thead class="thead-light">
+                  <tr class="text-center">
+                    <th>Nama</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Telepon</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="text-center" *ngFor="let val of listData" (dblclick)="view(val)">
+                    <td>{{ val.nama }}</td>
+                    <td>{{ val.username }}</td>
+                    <td>{{ val.email }}</td>
+                    <td>{{ val.telepon }}</td>
+                    <td class="row-action">
+                      <div class="btn-group btn-group-sm" role="group">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-primary fa fa-edit font-size-14 align-middle"
+                          placement="top"
+                          ngbTooltip="Ubah"
+                          (click)="edit(val)"
+                        ></button>
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-danger fa fa-trash font-size-14 align-middle"
+                          placement="top"
+                          ngbTooltip="Hapus"
+                          (click)="delete(val)"
+                        ></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="is.showForm == true">
+  <div class="row">
+    <div class="col-md-12">
+      <app-page-title
+        [title]="pageTitle"
+        [breadcrumbItems]="breadCrumbItems"
+      ></app-page-title>
+      <div class="card mt-4">
+        <div class="card-body">
+          <form action="" disabled="isView">
+            <fieldset [disabled]="is.view">
+              <div class="row">
+                <div class="col-md-12 pb-2">
+                  <h5 class="text-primary">Data Profil</h5>
+                  <hr />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label
+                      for="nama"
+                      class="col-md-3 col-form-label col-form-label-sm"
+                      >Nama</label
+                    >
+                    <div class="col-md-9">
+                      <input
+                        type="nama"
+                        class="form-control form-control-sm"
+                        [(ngModel)]="model.nama"
+                        name="nama"
+                        placeholder="nama"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="email"
+                      class="col-md-3 col-form-label col-form-label-sm"
+                      >Email</label
+                    >
+                    <div class="col-md-9">
+                      <input
+                        type="email"
+                        class="form-control form-control-sm"
+                        [(ngModel)]="model.email"
+                        name="email"
+                        placeholder="example@gmail.com"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="telpon"
+                      class="col-md-3 col-form-label col-form-label-sm"
+                      >No. Telp</label
+                    >
+                    <div class="col-md-9">
+                      <input
+                        type=""
+                        class="form-control form-control-sm"
+                        [(ngModel)]="model.telepon"
+                        name="telpon"
+                        placeholder="telpon"
+                        onkeypress="return /[0-9]/i.test(event.key)"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="alamat"
+                      class="col-md-3 col-form-label col-form-label-sm"
+                      >Alamat</label
+                    >
+                    <div class="col-md-9">
+                      <textarea
+                        name="alamat"
+                        id="alamat"
+                        class="form-control form-control-sm"
+                        [(ngModel)]="model.alamat"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label
+                      for="m_roles_id"
+                      class="col-md-3 col-form-label col-form-label-sm"
+                      >Hak Akses</label
+                    >
+                    <div class="col-md-9">
+                      <ng-select
+                        [(ngModel)]="model.m_roles_id"
+                        [items]="listAkses"
+                        [disabled]="is.view"
+                        bindLabel="nama"
+                        bindValue="id"
+                        placeholder="Pilih Hak Akses"
+                        name="m_roles_id"
+                        appendTo="body"
+                      >
+                      </ng-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <br />
+              <div class="row">
+                <div class="col-md-12 pb-2">
+                  <h5 class="text-primary">Detail Login</h5>
+                  <hr />
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group row">
+                    <label
+                      for="username"
+                      class="col-md-3 col-form-label col-form-label-sm required"
+                      >Username</label
+                    >
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        [(ngModel)]="model.username"
+                        name="username"
+                        placeholder="Username"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group row">
+                    <label
+                      for="password"
+                      class="col-md-3 col-form-label col-form-label-sm"
+                      >Password</label
+                    >
+                    <div class="col-md-9">
+                      <input
+                        type="password"
+                        class="form-control form-control-sm"
+                        [(ngModel)]="model.password"
+                        name="password"
+                        placeholder="Password"
+                      />
+                      <p
+                        *ngIf="is.edit"
+                        class="col-form-label col-form-label-sm text-muted"
+                      >
+                        *kosongi apabila tidak ingin diubah
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <div class="card-footer">
+          <div class="float-right">
+            <button class="btn btn-light btn-sm mr-2" (click)="index()">
+              <i class="fa fa-chevron-left font-size-12 align-middle"></i>
+              Kembali
+            </button>
+            <button class="btn btn-primary btn-sm" (click)="save()" [hidden]="is.view">
+              <i class="fa fa-save font-size-12 align-middle mr-2"></i>
+              Simpan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

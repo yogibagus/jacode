@@ -1,0 +1,58 @@
+.account-pages {
+    overflow: hidden;
+}
+
+.col-md-6 {
+    padding: 0;
+}
+
+.main-pages {
+    height: 100vh;
+}
+
+.form-section {
+    margin-left: 250px;
+    margin-top: 150px;
+    width: 400px;
+
+    .img-logo {
+        width: 60px;
+    }
+
+    .btn-login {
+        width: 70%;
+        outline: none;
+        border: none;
+        background: none;
+        background-color: rgb(80, 80, 199);
+        border-radius: 20px;
+        color: white;
+        padding: 10px;
+    }
+
+    .form-check {
+        padding-left: 2.25rem;
+    }
+}
+
+.intro-section {
+    background-image: url('../../../../assets/images/forest_trees_fog_110131_3840x2160.jpg');
+    height: 100%;
+    background-size: cover;
+
+    h1 {
+        font-size: xxx-large;
+        color: white;
+    }
+
+    .description {
+        margin: 0px 100px;
+        width: 100%;
+        color: white;
+
+        p {
+            font-size: 15px;
+            color: white;
+        }
+    }
+}

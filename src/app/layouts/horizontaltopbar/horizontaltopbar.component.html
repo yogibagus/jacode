@@ -1,0 +1,190 @@
+<header id="page-topbar">
+  <div class="navbar-header">
+    <div class="d-flex">
+      <!-- LOGO -->
+      <div class="navbar-brand-box">
+        <a href="javascript: void(0);" [routerLink]="['/']" class="logo">
+          <span class="logo-sm">
+            <img src="assets/images/logo.svg" alt="" height="22" />
+          </span>
+          <span class="logo-lg">
+            <img src="assets/images/logo-dark.png" alt="" height="17" />
+          </span>
+        </a>
+      </div>
+
+      <nav class="navbar navbar-dark navbar-expand-lg topnav-menu active">
+        <div class="collapse navbar-collapse" id="topnav-menu-content">
+          <ul class="navbar-nav d-flex align-items-center">
+           
+            <li class="nav-item ml-4">
+              <a
+                class="nav-linkarrow-none text-dark"
+                href="javascript: void(0);"
+                [routerLink]="['/dashboard']"
+                id="topnav-components"
+                role="button"
+              >
+                <i class="bx bx-customize mr-2"></i>Dashboard
+              </a>
+            </li>
+            <li class="nav-item ml-4">
+              <a
+                class="nav-linkarrow-none text-dark"
+                href="javascript: void(0);"
+                [routerLink]="['/menu']"
+                id="topnav-components"
+                role="button"
+              >
+                <i class="bx bx-customize mr-2"></i>Menu
+              </a>
+            </li>
+            <li class="nav-item ml-4">
+              <a
+                class="nav-linkarrow-none text-dark"
+                href="javascript: void(0);"
+                [routerLink]="['/customer']"
+                id="topnav-components"
+                role="button"
+              >
+                <i class="bx bx-copy mr-2"></i>Customer
+              </a>
+            </li>
+            <li class="nav-item ml-4">
+              <a
+                class="nav-linkarrow-none text-dark"
+                href="javascript: void(0);"
+                [routerLink]="['/promo']"
+                id="topnav-components"
+                role="button"
+              >
+                <i class="bx bx-brush mr-2"></i>Promo
+              </a>
+            </li>
+            <li class="nav-item ml-4 mr-2">
+              <a
+                class="nav-linkarrow-none text-dark"
+                href="javascript: void(0);"
+                [routerLink]="['/diskon']"
+                id="topnav-components"
+                role="button"
+              >
+                <i class="bx bx-menu mr-2"></i>Diskon
+              </a>
+            </li>
+          
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle arrow-none text-dark"
+                (click)="onMenuClick($event)"
+                href="javascript: void(0);"
+                id="topnav-components"
+                role="button"
+              >
+                <i class="bx bx-home-circle mr-2"></i>Kitchen
+                <div class="arrow-down"></div>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="topnav-dashboard">
+                <a
+                  href="javascript: void(0);"
+                   [routerLink]="['/order']"
+                  class="dropdown-item side-nav-link-ref"
+                  >Order</a
+                >
+              </div>
+            </li>
+
+             <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle arrow-none text-dark"
+                (click)="onMenuClick($event)"
+                href="javascript: void(0);"
+                id="topnav-components"
+                role="button"
+              >
+                <i class="bx bx-home-circle mr-2"></i>Laporan
+                <div class="arrow-down"></div>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="topnav-dashboard">
+                <a
+                  href="javascript: void(0);"
+                  class="dropdown-item side-nav-link-ref"
+                  >Laoran Penjualan</a
+                >
+                <a
+                  href="javascript: void(0);"
+                  class="dropdown-item side-nav-link-ref"
+                  >Laporan Customer</a
+                >
+                <a
+                  href="javascript: void(0);"
+                  class="dropdown-item side-nav-link-ref"
+                  >Laporan</a
+                >
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+
+      <button
+        type="button"
+        class="btn btn-sm px-3 font-size-16 d-lg-none header-item"
+        (click)="toggleMenubar()"
+      >
+        <i class="fa fa-fw fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="d-flex">
+      <div class="dropdown d-none d-lg-inline-block ml-1">
+        <button
+          type="button"
+          class="btn header-item noti-icon"
+          data-toggle="fullscreen"
+          (click)="fullscreen()"
+        >
+          <i class="bx bx-fullscreen text-dark"></i>
+        </button>
+      </div>
+      <div class="dropdown d-inline-block" ngbDropdown>
+        <button
+          type="button"
+          class="btn header-item text-dark"
+          id="page-header-user-dropdown"
+          ngbDropdownToggle
+        >
+          <img
+            class="rounded-circle header-profile-user"
+            src="{{user.foto}}" 
+            onerror="this.src='https://avamini.decko.my.id'"
+            alt="Header Avatar"
+          />
+          <span class="d-none d-xl-inline-block ml-1">{{user.nama}}</span>
+          <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+          <!-- item-->
+          <a class="dropdown-item" href="javascript: void(0);" [routerLink]="['/profile']"
+            ><i class="bx bx-user font-size-16 align-middle mr-1"></i>
+            Profile</a
+          >
+          <a class="dropdown-item" href="javascript: void(0);" [routerLink]="['/roles']"
+            ><i class="bx bx-wrench font-size-16 align-middle mr-1"></i>
+            Roles</a
+          >
+          <div class="dropdown-divider"></div>
+          <button
+            class="dropdown-item text-danger"
+            (click)="logout()"
+            ><i
+              class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"
+            ></i>
+            Logout</button
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
